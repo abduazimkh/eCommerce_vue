@@ -1,6 +1,12 @@
+
 :root{
+  --pontano-font: "Pontano Sans", sans-serif;
+  --league-font: "League Gothic", sans-serif;
+  --staatliches-font: "Staatliches", sans-serif;
   --pl-color: #fff;
+  --pd-color: #111;
 }
+
 
 *{
   margin: 0;
@@ -11,6 +17,8 @@
 }
 
 body{
-  font-family: sans-serif;
+  font-family: var(--pontano-font);
 }
-
+body::-webkit-scrollbar{
+  display: none;
+}
