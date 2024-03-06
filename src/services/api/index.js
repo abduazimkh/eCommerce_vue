@@ -1,8 +1,23 @@
 import axios from 'axios';
 
-export default () => {
-  const options = {};
-  options.baseURL = process.env.VUE_APP_URL;
-  const instance = axios.create(options);
-  return instance;
-};
+const options = {};
+options.baseURL = 'https://api.escuelajs.co/api/v1/';
+const instance = axios.create(options);
+// export default () => {
+// };
+
+export default instance
+
+
+// export default () => {
+//   const instance = axios.create({
+//     baseURL: 'https://api.escuelajs.co/api/v1/',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         Accept: "*/*",
+//         "Access-Control-Allow-Origin": "*"
+//     },
+//     timeout: 10000
+// });
+// return instance;
+// };
