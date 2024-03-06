@@ -4,6 +4,7 @@
   import 'swiper/css/navigation';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Pagination, Navigation } from 'swiper/modules';
+  import instance from "../../services/api";
 
   export default {
     components: {
@@ -15,6 +16,30 @@
         modules: [Pagination, Navigation],
       };
     },
+    data () {
+    return {
+      info: null,
+      loading: true,
+      errored: false
+    }
+  },
+  filters: {
+    currencydecimal (value) {
+      return value.toFixed(2)
+    }
+  },
+    mounted () {
+    instance.get('products')
+      .then(response => {
+        this.info = response.data
+        console.log(this.info)
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+      .finally(() => this.loading = false)
+  }
 
   };
 
@@ -36,12 +61,13 @@
     :modules="modules"
     class="mySwiper"
   >
-    <swiper-slide>Slide 1</swiper-slide>
-    <swiper-slide>Slide 2</swiper-slide><swiper-slide>Slide 3</swiper-slide>
-    <swiper-slide>Slide 4</swiper-slide><swiper-slide>Slide 5</swiper-slide>
-    <swiper-slide>Slide 6</swiper-slide><swiper-slide>Slide 7</swiper-slide>
-    <swiper-slide>Slide 8</swiper-slide><swiper-slide>Slide 9</swiper-slide>
-  </swiper>
+    <swiper-slide v-for="el in info" >
+      <img :src="el.images[0].match(/(https?:\/\/.*\.(?:png|jpg|jpeg))/i)" :alt="el.title">
+
+      <h3>{{ el.title }}</h3>
+      <p>{{ el.description }}</p>
+    </swiper-slide>
+  </swiper> 
 
   </div>
 </template>
@@ -57,14 +83,14 @@
     height: 100%;
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 50%;
+    transform: translateY(50%);
   }
   .swiper-slide {
-    text-align: center;
     font-size: 18px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    background-color: grey;
   }
 
   .swiper-slide img {

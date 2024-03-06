@@ -15,7 +15,7 @@
 <!-- html -->
 
 <template>
-  <div class="header banner">
+  <div class="header banner2">
     <Container>
       <div class="hero">
         <p>THE GRAPHENE T SHIRT</p>
@@ -33,8 +33,8 @@
 <!-- style -->
 
 <style lang="scss">
-  .banner{
-    background-image: url("../../assets//images/banner.webp");
+  .banner2{
+    background-image: url("../../assets//images/banner3.webp");
   }
 
 </style>
