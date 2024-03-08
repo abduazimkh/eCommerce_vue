@@ -32,7 +32,6 @@
     instance.get('products')
       .then(response => {
         this.info = response.data
-        console.log(this.info)
       })
       .catch(error => {
         console.log(error)
@@ -64,8 +63,12 @@
     <swiper-slide v-for="el in info" >
       <img :src="el.images[0].match(/(https?:\/\/.*\.(?:png|jpg|jpeg))/i)" :alt="el.title">
 
-      <h3>{{ el.title }}</h3>
-      <p>{{ el.description }}</p>
+      <span>{{ el.title }}</span>
+      <p>{{ el.description.length >= 100 ? el.description.slice(0, 100) : el.description }}</p>
+
+      <div class="price-text">
+        <strong>${{ el.price }}</strong>
+      </div>
     </swiper-slide>
   </swiper> 
 
@@ -87,16 +90,57 @@
     transform: translateY(50%);
   }
   .swiper-slide {
-    font-size: 18px;
+    position: relative;
     display: flex;
     flex-direction: column;
-    background-color: grey;
+    gap: 5px;
+    transition: all .3s ease;
+
+
+    span, strong{
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    p{
+      font-size: 14px;
+      font-weight: 600;
+      color: grey;
+      padding-bottom: 1rem;
+      padding-left: 2px;
+      visibility: hidden;
+    }
+
+    .price-text{
+      transition: all .2s ease-in-out;
+      position: absolute;
+      width: 100%;
+      height: 50px;
+      left: 0;
+      bottom: 0;
+      background-color: var(--pl-color);
+      padding-left: 1px;
+      strong{
+        font-size: 13px;
+      }
+    }
+
+  }
+
+  .swiper-slide:hover{
+    p{
+      visibility: visible;
+    }
+    .price-text{
+      height: 0px;
+    }
   }
 
   .swiper-slide img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: 520px;
     object-fit: cover;
+    padding-bottom: 1rem;
   }
 </style>
