@@ -64,7 +64,7 @@
     width: 100%;
     z-index: 9999;
     background-color: #fff;
-    box-shadow: 0 0 5px 1px grey;
+    // box-shadow: 0 0 5px 1px grey;
   }
   nav{
     padding: 14px 0;
