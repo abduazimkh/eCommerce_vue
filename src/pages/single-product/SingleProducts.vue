@@ -23,6 +23,7 @@
     },
     data () {
     return {
+	    errorPlaceholder: false,
       info: null,
       loading: true,
       errored: false
@@ -64,7 +65,16 @@
           class="mySwiper"
         >
           <swiper-slide v-for="el in info?.images" >
-            <img :src="el" :alt="info?.title">
+            <img
+              :onError="(e, s) => {
+				      	if (!s) {
+				      		errorPlaceholder = true
+				      	}
+              }
+				      "
+				        :src="!el || errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : 'https://' + el"
+                :alt="el?.title"
+            />
           </swiper-slide>
         </swiper>
       </div>
@@ -76,7 +86,17 @@
         <strong>${{ info?.price }}</strong>
       
         <div class="single-images"  >
-          <img v-for="el in info?.images" :src="el" :alt="info?.title">
+          <img
+            :onError="(e, s) => {
+				    	if (!s) {
+				    		errorPlaceholder = true
+				    	}
+            }
+				    "
+              v-for="el in info?.images"
+				      :src="!el|| errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : 'https://' + el"
+              :alt="info?.title"
+          />
         </div>
 
         <div class="size">
@@ -251,15 +271,12 @@
       height: 100%;
     }
 
-    .swiper-slide {
-      background-color: red;
-    }
-
     .swiper-slide img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border: 1px solid grey;
     }
 
   }

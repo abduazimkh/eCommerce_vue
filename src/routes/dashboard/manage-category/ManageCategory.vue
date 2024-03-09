@@ -25,7 +25,6 @@
     instance('categories')
       .then(response => {
         this.info = response.data
-        console.log(this.info)
       })
       .catch(error => {
         console.log(error)
