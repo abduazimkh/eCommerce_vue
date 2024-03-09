@@ -17,10 +17,9 @@
     }
   },
     mounted () {
-    instance.get('categories')
+    instance('categories')
       .then(response => {
         this.info = response.data
-        console.log(this.info)
       })
       .catch(error => {
         console.log(error)
@@ -41,10 +40,12 @@
       <div class="footer__content">
         <h2>Shop</h2>
 
-        <div class="shop-cards">
-          <RouterLink :to="'/'+el.name"  class="shop-card"  v-for="el in info" >
-            <RouterLink :to="'/'+el.name" >{{ el.name }}</RouterLink>
-          </RouterLink>
+        <div class="shop-cards" >
+          <div class="shop-card--items"  v-for="el in info">
+            <RouterLink :to="'/category/'+el.name" :key="el.id" class="shop-card"  >
+              <RouterLink :to="'/category/'+el.name" >{{ el.name }}</RouterLink>
+            </RouterLink>
+          </div>
         </div>
       </div>
     </Container>
@@ -138,7 +139,7 @@
     gap: 2.5rem;
     margin-bottom: 50px; 
 
-    .shop-card{
+    .shop-card--items{
       transition: all .2s ease-in;
       padding: 1.5rem 0;
       border-bottom: 1px solid lightgrey;
@@ -151,7 +152,7 @@
       } 
     }
 
-    .shop-card:hover{
+    .shop-card--items:hover{
       border-bottom: 1px solid #333;
       a{
         padding-left: 2rem
