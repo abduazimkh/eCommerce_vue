@@ -6,6 +6,11 @@
     components: {
       
     },
+    data(){
+      return{
+  	    errorPlaceholder: false,
+      }
+    },
     props: {
       name: {
         required: true
@@ -22,9 +27,6 @@
       dataCell: {
         required: true
       }
-    },
-    mounted(){
-      console.log(Object.keys(this.dataCell))
     }
   }
 
@@ -44,7 +46,16 @@
     <td :data-cell="Object.keys(this.dataCell)[3]" >{{ created.slice(0, 10) }}</td>
     <td :data-cell="Object.keys(this.dataCell)[2]" >
       <span>
-        <img :src="imgs" :alt="name" />
+        <img
+          :onError="(e, s) => {
+				  	if (!s) {
+				  		errorPlaceholder = true
+				  	}
+          }
+				  "
+				    :src="!imgs || errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : imgs"
+            :alt="name"
+        />
       </span>
     </td>
     <td :data-cell="'Actions'" >

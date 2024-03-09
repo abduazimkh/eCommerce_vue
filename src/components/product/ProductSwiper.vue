@@ -19,6 +19,7 @@
     },
     data () {
     return {
+	    errorPlaceholder: false,
       info: null,
       loading: true,
       errored: false
@@ -76,7 +77,16 @@
   >
     <swiper-slide v-for="el in info" >
       <RouterLink :key="el.id" :to="'/single/'+el.id">
-        <img :src="el.images[0].match(/(https?:\/\/.*\.(?:png|jpg|jpeg))/i)" :alt="el.title">
+        <img
+          :onError="(e, s) => {
+				  	if (!s) {
+				  		errorPlaceholder = true
+				  	}
+          }
+				  "
+				  :src="!el.images[0] || errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : 'https://' + el.images[0]"
+          :alt="el?.title"
+        />
 
         <span>{{ el.title }}</span>
         <p>{{ el.description.length >= 100 ? el.description.slice(0, 100) : el.description }}</p>
@@ -162,6 +172,7 @@
     height: 630px;
     object-fit: cover;
     padding-bottom: 1rem;
+    border: 1px solid grey;
   }
 
   @media only screen and (max-width: 1300px) {
