@@ -13,9 +13,6 @@
       category: {
         required: true
       },
-      price: {
-        required: true
-      },
       imgs: {
         required: true
       },
@@ -38,7 +35,6 @@
         <span >{{ category }}</span>
       </p>
     </td>
-    <td>${{ price }}</td>
     <td>{{ created.slice(0, 10) }}</td>
     <td>
       <img :src="imgs" :alt="name" />
