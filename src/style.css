@@ -23,3 +23,18 @@ body{
 body::-webkit-scrollbar{
   display: none;
 }
+
+button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .4s ease;
+}
+
+button:hover{
+  opacity: .9;
+}
+
+button:active{
+  transform: scale(.97);
+}
