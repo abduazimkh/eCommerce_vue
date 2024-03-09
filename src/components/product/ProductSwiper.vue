@@ -75,7 +75,7 @@
     class="mySwiper"
   >
     <swiper-slide v-for="el in info" >
-      <RouterLink :to="el.title">
+      <RouterLink :to="'/single/'+el.id">
         <img :src="el.images[0].match(/(https?:\/\/.*\.(?:png|jpg|jpeg))/i)" :alt="el.title">
 
         <span>{{ el.title }}</span>
