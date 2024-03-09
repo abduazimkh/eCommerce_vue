@@ -10,6 +10,9 @@
     components: {
       Nav,
       Footer
+    },
+    mounted(){
+      console.log()
     }
   }
 
@@ -18,9 +21,9 @@
 <!-- html -->
 
 <template>
-  <Nav/>
+  <Nav v-if="!$route.path?.includes('/dashboard')" />
   <RouterView/>
-  <Footer/>
+  <Footer v-if="!$route.path?.includes('/dashboard')" />
 </template>
 
 <!-- style -->
