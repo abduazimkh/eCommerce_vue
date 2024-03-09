@@ -60,9 +60,33 @@
                 <input type="text" placeholder="Enter email address">
                 <button>Sign Up</button>
               </div>
-              <div class="checkbox-item">
-                <input type="checkbox">
-                <label for="">I agree to the terms and conditions</label>
+              <div class="checkbox-wrapper-37">
+                <input type="checkbox" name="checkbox" id="terms-checkbox-37" />
+                <label for="terms-checkbox-37" class="terms-label">
+                  <svg
+                    class="checkbox-svg"
+                    viewBox="0 0 200 200"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <mask id="path-1-inside-1_476_5-37" fill="white">
+                      <rect width="200" height="200" />
+                    </mask>
+                    <rect
+                      width="200"
+                      height="200"
+                      class="checkbox-box"
+                      stroke-width="40"
+                      mask="url(#path-1-inside-1_476_5-37)"
+                    />
+                    <path
+                      class="checkbox-tick"
+                      d="M52 111.018L76.9867 136L149 64"
+                      stroke-width="15"
+                    />
+                  </svg>
+                  <span class="label-text">I agree to the terms and conditions</span>
+                </label>
               </div>
             </form>
           </div>
@@ -164,6 +188,44 @@
         gap: 1rem;
         height: 100px;
 
+        .checkbox-wrapper-37 input[type="checkbox"] {
+          display: none;  
+        }
+        .checkbox-wrapper-37 .terms-label {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+        }
+        .checkbox-wrapper-37 .terms-label .label-text {
+          margin-left: 10px;
+        }
+        .checkbox-wrapper-37 .checkbox-svg {
+          width: 25px;
+          height: 25px;
+          border: 1px solid #7777 !important;
+        }
+        .checkbox-wrapper-37 .checkbox-svg {
+          border: 1px solid transparent;
+        }
+        .checkbox-wrapper-37 .checkbox-box {
+          fill: #fff;
+          // stroke: #ff7a00;
+          stroke-dasharray: 800;
+          stroke-dashoffset: 800;
+          transition: stroke-dashoffset 0.6s ease-in;
+        }
+        
+        .checkbox-wrapper-37 .checkbox-tick {
+          stroke: #111;
+          stroke-dasharray: 182;
+          stroke-dashoffset: 182;
+          transition: stroke-dashoffset 0.4s ease-in;
+        }
+        .checkbox-wrapper-37 input[type="checkbox"]:checked + .terms-label .checkbox-box,
+        .checkbox-wrapper-37 input[type="checkbox"]:checked + .terms-label .checkbox-tick {
+          stroke-dashoffset: 0;
+        }
+
         .sumition{
           height: 70px;
           border-bottom: 1px solid grey;
@@ -176,6 +238,7 @@
             border: none;
             outline: none;
             flex: 1;
+            padding-right: 10px;
           }
 
           &:has(> input:focus){
