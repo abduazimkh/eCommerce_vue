@@ -128,3 +128,31 @@
       }
   }
 }
+
+
+@media only screen and (max-width: 1230px){
+  .dashboard-table{
+      thead{
+          display: none;
+      }
+
+      tr{
+          display: block;
+          border: 1px solid black;
+          padding: 10px;
+          td{
+            padding: 15px 10px;
+              text-align: left;
+              display: flex;
+              align-items: center;
+              border: none;
+              &::before{
+                  flex: 1;
+                  text-transform: uppercase;
+                  content: attr(data-cell) " : ";
+              }
+          }
+          
+      }
+  }
+}

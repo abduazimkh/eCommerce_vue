@@ -62,8 +62,10 @@
         </tr>
       </thead>
       <tbody>
+        
         <Table
             v-for="el in info"
+            :dataCell="el"
             :name="el?.title"
             :category="el?.category.name"
             :price="el?.price"
