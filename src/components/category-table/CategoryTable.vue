@@ -18,7 +18,13 @@
       },
       created: {
         required: true
+      },
+      dataCell: {
+        required: true
       }
+    },
+    mounted(){
+      console.log(Object.keys(this.dataCell))
     }
   }
 
@@ -29,17 +35,19 @@
 
 <template>
   <tr>
-    <td>{{ name }}</td>
-    <td>
+    <td :data-cell="Object.keys(this.dataCell)[0]" >{{ name }}</td>
+    <td :data-cell="Object.keys(this.dataCell)[1]" >
       <p className="table-variant__wrapper">
         <span >{{ category }}</span>
       </p>
     </td>
-    <td>{{ created.slice(0, 10) }}</td>
-    <td>
-      <img :src="imgs" :alt="name" />
+    <td :data-cell="Object.keys(this.dataCell)[3]" >{{ created.slice(0, 10) }}</td>
+    <td :data-cell="Object.keys(this.dataCell)[2]" >
+      <span>
+        <img :src="imgs" :alt="name" />
+      </span>
     </td>
-    <td>
+    <td :data-cell="'Actions'" >
       <div className="table-action__wrapper">
         <button class="link btn-warning">Edit</button>
         <button class="link btn-danger">Delete</button>

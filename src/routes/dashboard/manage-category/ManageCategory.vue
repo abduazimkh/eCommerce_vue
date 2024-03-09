@@ -62,6 +62,7 @@
       <tbody>
         <Table
             v-for="el in info"
+            :dataCell="el"
             :name="el?.id"
             :category="el?.name"
             :imgs="el?.image"
