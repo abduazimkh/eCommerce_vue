@@ -103,4 +103,80 @@
     transform: scaleY(1);
   }
 
+  @media only screen and (max-width: 900px) {
+    .header{
+      height: 70vh;
+      /* background-position: calc(30%); */
+    }
+    .hero{
+      h2{
+        font-size: 1.5rem;
+        max-width: 460px;
+      }
+    }
+  
+  }
+
+  @media only screen and (max-width: 600px) {
+    .header{
+      height: calc(100vh + 200px);
+      background-position: calc(100% - 70%);
+    }
+
+    .hero{
+      width: 100vw;
+      p{
+        font-size: 13px;
+      }
+      h2{
+        max-width: 580px;
+        font-size: 1rem !important;
+      }
+
+      i{
+        font-size: 12px;
+      }
+
+      li{
+        font-size: 13px;
+      }
+    }
+
+    .header {
+    .hero{
+      color: var(--pd-color);
+      ul{
+        color: var(--pd-color);
+        i{
+          display: block;
+        }
+      }
+    }
+    .hero::after{
+      transform: scaleY(1);
+      background-color: #fff;
+      width: 100%;
+      height: 100%;
+      border-bottom: .5px solid #bdbdbda1;
+    }
+  }
+  
+  }
+
+  @media only screen and (max-width: 600px) {
+    .header{
+      height: calc(60vh); 
+      background-position: calc(100% - 70%);
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .header{
+      margin-top: 200px;
+      height: calc(60vh); 
+      background-position: calc(100% - 70%);
+    }
+  }
+
+
 </style>

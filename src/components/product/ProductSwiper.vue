@@ -5,6 +5,7 @@
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Pagination, Navigation } from 'swiper/modules';
   import instance from "../../services/api";
+  import { RouterLink } from 'vue-router';
 
   export default {
     components: {
@@ -49,26 +50,41 @@
   <div class="product__swiper">
 
     <swiper
+      :breakpoints="{       
+        120: {       
+           slidesPerView: 1,
+        },
+        500: {       
+           slidesPerView: 2,
+        },
+        700: {       
+           slidesPerView: 3,
+        },
+        14000: {       
+           slidesPerView: 4,
+        },         
+      }"
     :pagination="{
       type: 'fraction',
     }"
     :spaceBetween="5"
     :loop="true"
-    :centeredSlides="true"
     :slidesPerView="3.9"
     :navigation="true"
     :modules="modules"
     class="mySwiper"
   >
     <swiper-slide v-for="el in info" >
-      <img :src="el.images[0].match(/(https?:\/\/.*\.(?:png|jpg|jpeg))/i)" :alt="el.title">
+      <RouterLink :to="el.title">
+        <img :src="el.images[0].match(/(https?:\/\/.*\.(?:png|jpg|jpeg))/i)" :alt="el.title">
 
-      <span>{{ el.title }}</span>
-      <p>{{ el.description.length >= 100 ? el.description.slice(0, 100) : el.description }}</p>
-
-      <div class="price-text">
-        <strong>${{ el.price }}</strong>
-      </div>
+        <span>{{ el.title }}</span>
+        <p>{{ el.description.length >= 100 ? el.description.slice(0, 100) : el.description }}</p>
+              
+        <div class="price-text">
+          <strong>${{ el.price }}</strong>
+        </div>
+      </RouterLink>
     </swiper-slide>
   </swiper> 
 
@@ -79,7 +95,8 @@
   .product__swiper{
     margin: 100px 0;
     position: relative;
-    height: 600px;
+    height: 700px; 
+
   }
   .swiper {
     width: 100%;
@@ -89,13 +106,16 @@
     bottom: 50%;
     transform: translateY(50%);
   }
+
   .swiper-slide {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 5px;
     transition: all .3s ease;
-
+    a{
+      color: #333;
+    }
 
     span, strong{
       font-size: 14px;
@@ -139,8 +159,65 @@
   .swiper-slide img {
     display: block;
     width: 100%;
-    height: 520px;
+    height: 630px;
     object-fit: cover;
     padding-bottom: 1rem;
   }
+
+  @media only screen and (max-width: 1300px) {
+    .product__swiper{
+      height: 600px; 
+
+    }
+    .swiper-slide img {
+      height: 530px;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .product__swiper{
+      height: 500px; 
+
+    }
+    .swiper-slide img {
+      height: 430px;
+    }
+  }
+
+  @media only screen and (max-width: 915px) {
+    .swiper-slide img {
+      height: 395px;
+    }
+  }
+
+  @media only screen and (max-width: 700px) {
+    .product__swiper{
+      height: 460px; 
+
+    }
+    .swiper-slide img {
+      height: 375px;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    .product__swiper{
+      height: 460px; 
+
+    }
+    .swiper-slide img {
+      height: 385px;
+    }
+  }
+
+  @media only screen and (max-width: 280px) {
+    .product__swiper{
+      height: 300px;
+    }
+    .swiper-slide img {
+      height: 220px;
+
+    }
+  }
+
+
 </style>

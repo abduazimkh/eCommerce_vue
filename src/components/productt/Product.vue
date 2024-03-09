@@ -22,7 +22,7 @@
         <h2>WE’VE USED THE LIGHTEST MATERIAL ON EARTH TO MAKE THE LIGHTEST T SHIRT WE’VE EVER BUILT</h2>
         <ul>
           <i class="bi bi-caret-right-fill"></i>
-          <li>Join the waiting list</li>
+          <li>Join the waiting list jjj</li>
         </ul>
       </div>
     </Container>
@@ -35,6 +35,12 @@
 <style lang="scss">
   .banner2{
     background-image: url("../../assets//images/banner3.webp");
+  }
+
+  @media only screen and (max-width: 500px) {
+    .banner2{
+      background-position: center;
+    }
   }
 
 </style>
