@@ -1,12 +1,38 @@
 <script>
   import "../Dashboard.scss";
-  import Table from "../../../components/manage-table/ManageTable.vue";
+  import Table from "../../../components/category-table/CategoryTable.vue";
+  import instance from "../../../services/api"; 
+
 
   export default {
     components: {
       Table,
 
     },
+    data () {
+    return {
+      info: null,
+      loading: true,
+      errored: false
+    }
+  },
+  filters: {
+    currencydecimal (value) {
+      return value.toFixed(2)
+    }
+  },
+    mounted () {
+    instance('categories')
+      .then(response => {
+        this.info = response.data
+        console.log(this.info)
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+      .finally(() => this.loading = false)
+  }
 
   }
 
@@ -27,17 +53,20 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Name</th>
-          <th>Name</th>
-          <th>Name</th>
-          <th>Name</th>
+          <th>Category</th>
+          <th>Data</th>
+          <th>Image</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <Table
-
-        />
+            v-for="el in info"
+            :name="el?.id"
+            :category="el?.name"
+            :imgs="el?.image"
+            :created="el?.creationAt"
+          />
       </tbody>
       <tfoot></tfoot>
     </table>
