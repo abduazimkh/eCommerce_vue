@@ -50,7 +50,6 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
-
   }
 
   .cards1{
@@ -58,6 +57,24 @@
   }
   .cards2{
     background-image: url("../../assets/images/banner2.webp");
+  }
+
+  @media only screen and (max-width: 900px) {
+    .cards-content{
+      grid-template-columns: 1fr !important;
+    }
+    .cards1, .cards2{
+      background-position: center;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .cards-content{
+      grid-template-columns: 1fr !important;
+    }
+    .cards1, .cards2{
+      background-position: center calc(100% - 50px);
+    }
   }
 
 </style>

@@ -288,4 +288,45 @@
 
 
 
+
+  @media only screen and (max-width: 1050px) {
+    .shop-cards{
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer__bottom--nav{
+      padding: 80px 0 80px 0;
+      .footer-nav{
+        flex-direction: column;
+        h3{
+          max-width: 100%;
+        }
+
+        ul{
+          min-width: 150px;
+          flex-direction: column;
+          gap: 1rem;
+          margin-top: 1rem;
+        }
+      }
+    }
+
+  }
+
+  @media only screen and (max-width: 650px) {
+    .shop-cards{
+      grid-template-columns: 1fr;
+    }
+
+    .footer__bottom--nav{
+      padding: 50px 0 50px 0;
+      .footer-nav{
+        h3{
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+
+
 </style>

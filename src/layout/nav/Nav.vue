@@ -26,6 +26,7 @@
     <TopNavigation/>
     <Container>
       <nav>
+        <button class="open">Open</button>
         <ul class="nav-list">
           <li>
             <RouterLink to="/">Shop</RouterLink>
@@ -48,6 +49,8 @@
           <Button><i class="bi bi-person"></i></Button>
           <Button><i class="bi bi-bag"></i></Button>
         </ul>
+
+        <Button class="cart" ><i class="bi bi-bag"></i></Button>
       </nav>
     </Container>
   </div>
@@ -70,6 +73,10 @@
     padding: 14px 0;
     display: flex;
     align-items: center;
+    .open, .cart{
+      display: none;
+    }
+
     a{
       color: var(--pd-color);
     }
@@ -104,6 +111,55 @@
       i{
         font-size: 1.2rem;
       }
+    }
+  }
+
+
+  @media only screen and (max-width: 850px) {
+    nav{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+
+      .open, .cart{
+        display: block;
+      }
+
+      .nav-list, .nav-btns{
+        display: none;
+      }
+
+      .open{
+        max-width: 50px;
+        height: 30px;
+      }
+
+      .cart{
+        place-self: end;
+      }
+
+      h1{
+        place-self: center;
+      }
+
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    nav{
+      grid-template-columns: 1fr;
+      place-items: center;
+      gap: 10px;
+      
+      .cart{
+        place-self: center;
+      }
+
+      h1{
+        font-size: 1.4rem;
+        place-self: center;
+      }
+
     }
   }
 

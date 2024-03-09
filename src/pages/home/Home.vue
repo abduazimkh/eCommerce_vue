@@ -3,13 +3,11 @@
 <script>
   import Header from '../../components/header/Header.vue';
   import Main from "../../layout/main/Main.vue";
-  import Footer from "../../layout/footer/Footer.vue";
 
   export default {
     components: {
       Header,
       Main,
-      Footer
     }
   }
 
@@ -22,7 +20,6 @@
   <div class="home">
     <Header/>
     <Main/>
-    <Footer/>
   </div>
 </template>
 
