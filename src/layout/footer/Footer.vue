@@ -42,7 +42,7 @@
 
         <div class="shop-cards" >
           <div class="shop-card--items"  v-for="el in info">
-            <RouterLink :to="'/category/'+el.name" class="shop-card"  >
+            <RouterLink :to="'/category/'+el.name" :key="el.id" class="shop-card"  >
               <RouterLink :to="'/category/'+el.name" >{{ el.name }}</RouterLink>
             </RouterLink>
           </div>
