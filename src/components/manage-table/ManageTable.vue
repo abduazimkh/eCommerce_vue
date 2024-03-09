@@ -1,6 +1,8 @@
 <!-- script -->
 
 <script>
+import instance from '../../services/api'
+
 
   export default { 
     components: {
@@ -30,6 +32,21 @@
       dataCell: {
         required: true
       }
+    },
+    methods: {
+      deletePtoduct() {
+        const a = confirm("Are you sure to delete thi product")
+        if(a){
+          instance.delete('products/' + this.dataCell.id)
+          .then(response => {
+              console.log(response) 
+          })
+          .catch(error => {
+            console.log(error)
+          })
+          .finally((err) => console.log(err))
+        }
+      }
     }
   }
 
@@ -58,7 +75,7 @@
           }
 				  "
             v-for="el in dataCell.images"
-				    :src="!el || errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : el"
+				    :src="el || errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : el"
             :alt="name"
         />
       </span>
@@ -66,7 +83,7 @@
     <td :data-cell="'Actions'" >
       <div className="table-action__wrapper">
         <button class="link btn-warning">Edit</button>
-        <button class="link btn-danger">Delete</button>
+        <button @click="deletePtoduct" class="link btn-danger">Delete</button>
       </div>
     </td>
   </tr>

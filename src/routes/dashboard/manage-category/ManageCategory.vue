@@ -51,7 +51,7 @@
       <table className="dashboard-table">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Id</th>
           <th>Category</th>
           <th>Data</th>
           <th>Image</th>
