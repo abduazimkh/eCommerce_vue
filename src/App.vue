@@ -21,9 +21,9 @@
 <!-- html -->
 
 <template>
-  <Nav v-if="!$route.path?.includes('/dashboard')" />
+  <Nav v-if="!$route.path?.includes('/dashboard') && !$route.path?.includes('/register') && !$route.path?.includes('/login')" />
   <RouterView/>
-  <Footer v-if="!$route.path?.includes('/dashboard')" />
+  <Footer v-if="!$route.path?.includes('/dashboard') && !$route.path?.includes('/register') && !$route.path?.includes('/login')" />
 </template>
 
 <!-- style -->

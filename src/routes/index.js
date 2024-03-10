@@ -5,12 +5,31 @@ import Dashboard from "./dashboard/Dashboard.vue";
 import ManageProduct from './dashboard/manage-product/ManageProduct.vue';
 import ManageCategory from './dashboard/manage-category/ManageCategory.vue';
 import ManageUsers from './dashboard/manage-users/ManageUsers.vue';
+import SignIn from "./auth/sign-in/SignIn.vue";
+import Login from "./auth/login/Login.vue";
+import Cart from "../pages/cart/Cart.vue";
+
 
 const routes = [
   {
     path: "/",
     name: "home",
     component: Home
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: SignIn
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: Cart
   },
   {
     path: "/single/:id",

@@ -65,7 +65,6 @@
     <td :data-cell="'Actions'" >
       <div className="table-action__wrapper">
         <button class="link btn-warning">Edit</button>
-        <button class="link btn-danger">Delete</button>
       </div>
     </td>
   </tr>

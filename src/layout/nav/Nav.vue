@@ -5,14 +5,25 @@
   import Container from "../../utils/Container.vue";
   import Button from "../../utils/Button.vue";
   import TopNavigation from "../../components/top-navigation/TopNavigation.vue";
+  import Search from "../../utils/Search.vue";
 
   export default {
     components: {
       Container,
       Button,
       TopNavigation,
+      Search,
 
-    }
+    },
+    data(){
+      return {
+        isOpen: false,
+      }
+    },
+    // methods() {
+    //   console.log(this.isOpen)
+    // }
+
   }
 
 
@@ -42,18 +53,21 @@
           </li>
         </ul>
 
-        <h1>vollebak</h1>
+        <h1><RouterLink to="/" >vollebak</RouterLink></h1>
 
         <ul class="nav-btns" >
-          <Button><span class="pi pi-search"></span></Button>
-          <Button><i class="bi bi-person"></i></Button>
-          <Button><i class="bi bi-bag"></i></Button>
+          <Button @click="isOpen =! isOpen" ><span class="pi pi-search"></span></Button>
+          <Button>
+            <RouterLink to="/register" ><i class="bi bi-person"></i></RouterLink>
+          </Button>
+          <Button><RouterLink to="cart"><i class="bi bi-bag"></i></RouterLink></Button>
         </ul>
 
-        <Button class="cart" ><i class="bi bi-bag"></i></Button>
+        <Button class="cart" ><RouterLink to="cart"><i class="bi bi-bag"></i></RouterLink></Button>
       </nav>
     </Container>
   </div>
+  <Search :isOpen="isOpen" v-if="isOpen" />
 </template>
 
 
@@ -80,6 +94,7 @@
     a{
       color: var(--pd-color);
     }
+    
     h1{
       text-transform: uppercase;
       font-weight: 700;
@@ -105,11 +120,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #111;
+
+      cursor: pointer;
+      a{
+        color: #111;
+      }
       span{
         font-size: 1rem;
+        color: #111;
+
       }
       i{
         font-size: 1.2rem;
+        color: #111;
+
       }
     }
   }
