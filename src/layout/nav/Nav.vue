@@ -18,11 +18,13 @@
     data(){
       return {
         isOpen: false,
+        user: null,
       }
     },
-    // methods() {
-    //   console.log(this.isOpen)
-    // }
+
+    mounted() {
+      this.user = JSON.parse(atob(JSON.parse(atob(localStorage.getItem("access_token"))).split(".")[1])).exp < (new Date().getTime() + 1) / 1000
+    },
 
   }
 
@@ -58,7 +60,7 @@
         <ul class="nav-btns" >
           <Button @click="isOpen =! isOpen" ><span class="pi pi-search"></span></Button>
           <Button>
-            <RouterLink to="/register" ><i class="bi bi-person"></i></RouterLink>
+            <RouterLink :to="user === false ? '/dashboard' : '/register'" ><i class="bi bi-person"></i></RouterLink>
           </Button>
           <Button><RouterLink to="cart"><i class="bi bi-bag"></i></RouterLink></Button>
         </ul>

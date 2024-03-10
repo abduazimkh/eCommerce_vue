@@ -1,7 +1,16 @@
 import axios from 'axios';
 
-const options = {};
-options.baseURL = 'https://api.escuelajs.co/api/v1/';
+const options = {
+  baseURL: 'https://api.escuelajs.co/api/v1/',
+  headers: {
+    post: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers":
+            "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+    }
+  }
+};
 const instance = axios.create(options);
 // export default () => {
 // };

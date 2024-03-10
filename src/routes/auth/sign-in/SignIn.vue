@@ -17,6 +17,7 @@
         name: "",
         email: "",
         password: "",
+        avatar: "",
       }
     },
     methods:{
@@ -30,8 +31,27 @@
         };
       },
       createUser(e){
-        e.preventDefault()
-        console.log(this.name);
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("name", this.name);
+        formData.append("email", this.email);
+        formData.append("password", this.password);
+        formData.append("avatar", this.avatar);
+
+        instance.post('users', formData)
+          .then(response => {
+            this.info = response.data;
+            if(response.status === 201){
+              window.location = '/login';
+            }
+          })
+          .catch(error => {
+            console.log(error)
+            this.errored = true
+          })
+        .finally(() => this.loading = false)
+
       }
       // saveChanges(){
       //   const formData = new FormData();
@@ -68,7 +88,8 @@
       <input v-model="name" type="text" placeholder="First name">
       <input v-model="email" type="email" placeholder="Email">
       <input v-model="password" type="password" placeholder="Password">
-      <input @change="uploadImage" type="file" accept="image/*" placeholder="Image">
+      <input v-model="avatar" type="text" placeholder="Image">
+      <!-- <input @change="uploadImage" type="file" accept="image/*" placeholder="Image"> -->
 
       <button >Sign Up</button>
 

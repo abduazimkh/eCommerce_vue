@@ -12,7 +12,18 @@
       Footer
     },
     mounted(){
-      console.log()
+      const a = JSON.parse(atob(localStorage.getItem("access_token")))
+      if(!a){
+        window.location = "/"
+
+      }
+    },
+    updated(){
+      const a = JSON.parse(atob(localStorage.getItem("access_token")))
+      if(!a){
+        window.location = "/"
+
+      }
     }
   }
 
