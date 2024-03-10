@@ -26,7 +26,8 @@
 	    errorPlaceholder: false,
       info: null,
       loading: true,
-      errored: false
+      errored: false,
+      imgs: null,
     }
   },
   filters: {
@@ -34,7 +35,12 @@
       return value.toFixed(2)
     }
   },
-    mounted () {console.log(this.$route.params.id);
+    methods: {
+      saved(el){
+        this.imgs = el
+      },
+    },
+    mounted () {
     instance('products/'+ this.$route.params.id)
       .then(response => {
         this.info = response.data
@@ -47,9 +53,22 @@
       .finally(() =>{
         this.loading = false
       })
+    },
+    updated(){
+      instance('products/'+ this.$route.params.id)
+      .then(response => {
+        this.info = response.data
+        console.log(this.info)
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+      .finally(() =>{
+        this.loading = false
+      })
+    }
   }
-  }
-
 </script>
 
 <template>
@@ -72,9 +91,9 @@
 				      	}
               }
 				      "
-				        :src="!el || errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : 'https://' + el"
+				        :src="!el || errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : imgs?.length > 0 ? this.imgs : el  "
                 :alt="el?.title"
-            />
+                />
           </swiper-slide>
         </swiper>
       </div>
@@ -94,7 +113,8 @@
             }
 				    "
               v-for="el in info?.images"
-				      :src="!el|| errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : 'https://' + el"
+              @click="saved(el)"
+				      :src="!el|| errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : el"
               :alt="info?.title"
           />
         </div>
