@@ -8,12 +8,13 @@ const store = createStore({
     }
   },
   mutations: {
-    productsData (state, action) {
+    cartData (state, action) {
       state.data = [...state.data, action]
     },
-    removeProductsData (state, action) {
-      const data = state.data?.filter((item) => item?.id !== action?.id);
-      state.data = data;
+    removeCartData (state, action) {
+      const data = state.data.findIndex((product) => product.id === action?.id);
+      let removeditem = state.data.filter((_, index) => index !== data);
+      state.data = removeditem;
     }
   },
   

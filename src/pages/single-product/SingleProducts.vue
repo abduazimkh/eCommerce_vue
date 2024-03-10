@@ -35,16 +35,10 @@
       return value.toFixed(2)
     }
   },
-    methods: {
-      saved(el){
-        this.imgs = el
-      },
-    },
     mounted () {
     instance('products/'+ this.$route.params.id)
       .then(response => {
         this.info = response.data
-        console.log(this.info)
       })
       .catch(error => {
         console.log(error)
@@ -58,7 +52,6 @@
       instance('products/'+ this.$route.params.id)
       .then(response => {
         this.info = response.data
-        console.log(this.info)
       })
       .catch(error => {
         console.log(error)
@@ -67,7 +60,18 @@
       .finally(() =>{
         this.loading = false
       })
-    }
+    },
+    methods: {
+      saved(el){
+        this.imgs = el
+      },
+      addProduct: function (el) {
+        this.$store.commit("cartData", el)
+      },
+      removeProduct: function (el) {
+        this.$store.commit("removeCartData", el)
+      },
+    },
   }
 </script>
 
@@ -137,7 +141,8 @@
           <p>Model is 6ft 4 / 193cm with a 42 inch / 106.7cm chest, and wears size XL.</p>
         </div>
 
-        <button class="single-btn">Add to cart</button>
+        <button v-if="$store.state.data.findIndex((product) => product.id !== info[0]?.id) === -1" @click="addProduct(info)"  class="single-btn">Add to cart</button>
+        <button v-else @click="removeProduct(info)"  class="single-btn">Remove from Cart</button>
 
         <ul class="single-list">
           <li>Three layer material built with 65% copper</li>
