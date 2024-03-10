@@ -31,6 +31,9 @@ import instance from '../../services/api'
       },
       dataCell: {
         required: true
+      },
+      isEditOpen: {
+        required: true
       }
     },
     methods: {
