@@ -9,7 +9,6 @@ import SignIn from "./auth/sign-in/SignIn.vue";
 import Login from "./auth/login/Login.vue";
 import Cart from "../pages/cart/Cart.vue";
 
-
 const routes = [
   {
     path: "/",
