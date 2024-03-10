@@ -9,7 +9,7 @@
 <template>
   <aside class="sidebar" >
 
-    <router-link to="/" >
+    <router-link class="dashboard-logo" to="/" >
       Villebox
     </router-link>
 
@@ -18,6 +18,13 @@
       <li><router-link to="/dashboard/categories" >Manage Categories</router-link></li>
       <li><router-link to="/dashboard/users" >Manage Users</router-link></li>
     </ul>
+
+    <ul class="nav-media">
+      <li><router-link to="/dashboard" >PP</router-link></li>
+      <li><router-link to="/dashboard/categories" >CC</router-link></li>
+      <li><router-link to="/dashboard/users" >UU</router-link></li>
+    </ul>
+
   </aside>
 </template>
 
@@ -35,6 +42,10 @@
     flex-direction: column;
     gap: 1rem;
     box-sizing: border-box;
+
+    .nav-media{
+      display: none;
+    }
 
     a{
       font-size: 2.5rem;
@@ -57,5 +68,77 @@
     }
 
   }
+
+
+
+
+@media only screen and (max-width: 800px){  
+  .sidebar{
+    bottom: 0;
+    left: 0;
+    min-width: 100vw;
+    width: 100vw;
+    max-height: 80px;
+    z-index: 9999;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    .dashboard-logo{
+      display: none;
+    }
+
+    ul{
+      align-items: center;
+      flex-direction: row;
+
+      li{
+        
+        a{
+          margin: 0;
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+
+  }
+}
+
+
+
+@media only screen and (max-width: 500px){
+  .sidebar{
+    ul{
+      gap: 10px;
+      li{
+        a{
+          gap: 0;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 400px){
+  .sidebar{
+    height: 70px;
+    .nav-media{
+      a{
+        display: inline-block;
+      }
+      gap: 3rem;
+      display: flex !important;
+    }
+    ul{
+      li{
+        a{
+          display: none;
+        }
+      }
+    }
+  }
+
+}
 
 </style>
