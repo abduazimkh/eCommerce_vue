@@ -75,7 +75,7 @@ import instance from '../../services/api'
           }
 				  "
             v-for="el in dataCell.images"
-				    :src="el || errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : el"
+				    :src="!el || errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : el"
             :alt="name"
         />
       </span>

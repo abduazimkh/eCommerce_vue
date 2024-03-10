@@ -6,11 +6,14 @@
   import { Pagination, Navigation } from 'swiper/modules';
   import instance from "../../services/api";
   import { RouterLink } from 'vue-router';
+  import ProductSwiperImg from "../../utils/ProductSwiperImg.vue";
 
   export default {
     components: {
       Swiper,
       SwiperSlide,
+      ProductSwiperImg,
+
     },
     setup() {
       return {
@@ -19,7 +22,6 @@
     },
     data () {
     return {
-	    errorPlaceholder: false,
       info: null,
       loading: true,
       errored: false
@@ -77,17 +79,9 @@
   >
     <swiper-slide v-for="el in info" >
       <RouterLink :key="el.id" :to="'/single/'+el.id">
-        <img
-          :onError="(e, s) => {
-				  	if (!s) {
-				  		errorPlaceholder = true
-				  	}
-          }
-				  "
-				  :src="!el.images[0] || errorPlaceholder ? `https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png` : 'https://' + el.images[0]"
-          :alt="el?.title"
+        <ProductSwiperImg
+          :imgs="el?.images[0]"
         />
-
         <span>{{ el.title }}</span>
         <p>{{ el.description.length >= 100 ? el.description.slice(0, 100) : el.description }}</p>
               
@@ -171,7 +165,7 @@
     width: 100%;
     height: 630px;
     object-fit: cover;
-    padding-bottom: 1rem;
+    margin-bottom: .236rem;
     border: 1px solid grey;
   }
 
@@ -231,4 +225,4 @@
   }
 
 
-</style>
+</style>../../utils/ProductSwiperImg.vue

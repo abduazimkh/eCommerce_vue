@@ -1,11 +1,56 @@
 <!-- script -->
 
 <script>
+  import instance from "../../../services/api";
   import Container from "../../../utils/Container.vue";
 
   export default {
     components: {
       Container,
+    },
+    data () {
+      return {
+        info: null,
+        loading: true,
+        errored: false,
+        previewImage: null,
+        name: "",
+        email: "",
+        password: "",
+      }
+    },
+    methods:{
+      uploadImage(e){
+        const image = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = e =>{
+          this.previewImage = e.target.result;
+
+        };
+      },
+      createUser(e){
+        e.preventDefault()
+        console.log(this.name);
+      }
+      // saveChanges(){
+      //   const formData = new FormData();
+      //   formData.append("name", "Aaaa");
+      //   formData.append("email", "Abbb@gmail.com");
+      //   formData.append("password", "Accch");
+      //   formData.append("avatar", "");
+
+      //   instance.post('users', formData)
+      //     .then(response => {
+      //       this.info = response
+      //       console.log(this.info)
+      //     })
+      //     .catch(error => {
+      //       console.log(error)
+      //       this.errored = true
+      //     })
+      //   .finally(() => this.loading = false)
+      // },
     }
   }
 
@@ -17,16 +62,15 @@
 <template>
   <Container>
     <div class="auth__wrapper">
-    <form class="register__form">
+    <form class="register__form" v-on:submit="createUser" >
       <h1>Sign Up</h1>
 
-      <input type="text" placeholder="First name">
-      <input type="text" placeholder="Last Name">
-      <input type="email" placeholder="Email">
-      <input type="password" placeholder="Password">
-      <input type="file" accept=".png" placeholder="Image">
+      <input v-model="name" type="text" placeholder="First name">
+      <input v-model="email" type="email" placeholder="Email">
+      <input v-model="password" type="password" placeholder="Password">
+      <input @change="uploadImage" type="file" accept="image/*" placeholder="Image">
 
-      <button>Sign Up</button>
+      <button >Sign Up</button>
 
       <small>If you are already registered, go to <router-link to="/login" >Login</router-link> page</small>
     </form>
