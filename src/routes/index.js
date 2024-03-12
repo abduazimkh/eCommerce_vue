@@ -8,6 +8,7 @@ import ManageUsers from './dashboard/manage-users/ManageUsers.vue';
 import SignIn from "./auth/sign-in/SignIn.vue";
 import Login from "./auth/login/Login.vue";
 import Cart from "../pages/cart/Cart.vue";
+import Category from "../pages/category/Category.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     component: Single,
   },
   {
+    path: "/category/:id",
+    name: "category",
+    component: Category,
+  },
+  {
     path: "/dashboard",
     name: "dashboard",
     component: Dashboard,
@@ -59,6 +65,6 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
-})
+});
 
 export default router

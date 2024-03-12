@@ -2,9 +2,11 @@
   export default {
     props: {
       isOpen: {
+        type: Boolean,
         required: true,
       },
       isEditOpen: {
+        type: Boolean,
         required: true,
       }
     },
@@ -19,6 +21,7 @@
       <slot/>
     </div>
   </div>
+  <div v-else></div>
 </template>
 
 <style lang="scss">
@@ -54,12 +57,13 @@
       gap: 1rem;
       position: relative;
       height: 100%;
-      input{
+      input, select{
         height: 40px;
         text-indent: 20px;
         font-size: 1rem;
         outline: none;
         border: 1px solid #111;
+        background-color: transparent;
         &::-webkit-inner-spin-button{
           display: none;
         }

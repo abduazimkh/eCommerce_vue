@@ -12,6 +12,7 @@
     data () {
     return {
       info: null,
+      categoryData: null,
       loading: true,
       errored: false,
       isOpen: false,
@@ -21,7 +22,7 @@
       price: Number,
       category: Number,
       images: null,
-
+      productId: null,
     }
   },
   methods: {
@@ -36,21 +37,52 @@
       })
       .finally(() => this.loading = false);
     },
+    allCategoryData: function () {
+      instance('categories')
+      .then(response => {
+        this.categoryData = response.data
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+      .finally(() => this.loading = false);
+    },
+
+    singleData(id){
+      instance('products/'+ id)
+      .then(response => {
+        this.info = response.data
+        this
+
+        console.log(this.info)
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+      .finally(() => this.loading = false);
+    },
 
     createProduct(e){
       e.preventDefault();
 
-      const formData = new FormData();
-      formData.append("title", this.title);
-      formData.append("description", this.description);
-      formData.append("price", this.price);
-      formData.append("category", this.category);
-      formData.append("images", ["https://api.360tv.ru/get_resized/B6xgwEwtWMG0lFu1jzGBY2Nquv0=/1080x607/filters:focal(0.5:0.5):format(webp)/YXJ0aWNsZXMvaW1hZ2UvMjAyMy81L3RhZHpoaWstcG9ldC5qcGc.webp"]);
+      // console.log(this.category)
 
-      instance.post('products', formData)
+      instance.post('products', {
+        title: this.title,
+        price: this.price,
+        description: this.description,
+        categoryId: this.category,
+        images: this.images.split(" ")
+
+      })
         .then(response => {
           this.info = response;
-          console.log(this.info)
+          if(response.status === 201){
+            this.isOpen = false;
+            console.log(response.data)
+          }
         })
         .catch(error => {
           console.log(error)
@@ -59,16 +91,20 @@
       .finally(() => this.loading = false)
     },
 
-    createProduct(e){
+    updateProduct(e){
       e.preventDefault();
 
-      instance.put('products', {
+      instance.put(`products/${this.productId}`, {
         title: this.title,
         price: this.price
       })
         .then(response => {
-          this.info = response;
-          console.log(this.info)
+          if(response.status === 200){
+            this.isEditOpen = false;
+          }
+          this.title = "";
+          this.price = "";
+          this.info = response.data;
         })
         .catch(error => {
           console.log(error)
@@ -80,11 +116,17 @@
     handleClick(e){
       if(e.target.closest(".btn-warning")){
         this.isEditOpen =! this.isEditOpen 
+        this.productId = e.target.dataset.productId
+        this.singleData(this.productId)
       }
     }
 
   },
   mounted() {
+    this.allData()
+    this.allCategoryData()
+  },
+  updated() {
     this.allData()
   },
 }
@@ -115,14 +157,14 @@
         </tr>
       </thead>
       <tbody @click="handleClick" >
-        
         <Table
             v-for="el in info"
+            :id="el.id"
             :dataCell="el"
             :name="el?.title"
-            :category="el?.category.name"
+            :category="el?.category?.name"
             :price="el?.price"
-            :imgs="el?.images[0]"
+            :imgs="el.images[0]"
             :created="el?.creationAt"
             :isEditOpen="isEditOpen"
           />
@@ -141,7 +183,9 @@
       <input v-model="title" type="text" placeholder="Title">
       <input v-model="description" type="text" placeholder="description">
       <input v-model="price" type="number" placeholder="Price">
-      <input v-model="category" type="number" placeholder="Category">
+      <select v-model="category">
+        <option v-for="el in categoryData" :value="el.id">{{ el.name }}</option>
+      </select>
       <input v-model="images" type="text" placeholder="Images">
 
       <button>Create Product</button>

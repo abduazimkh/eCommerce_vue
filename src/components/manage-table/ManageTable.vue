@@ -34,6 +34,9 @@ import instance from '../../services/api'
       },
       isEditOpen: {
         required: true
+      },
+      id: {
+        require: true
       }
     },
     methods: {
@@ -85,7 +88,7 @@ import instance from '../../services/api'
     </td>
     <td :data-cell="'Actions'" >
       <div className="table-action__wrapper">
-        <button class="link btn-warning">Edit</button>
+        <button :data-product-id="id" class="link btn-warning">Edit</button>
         <button @click="deletePtoduct" class="link btn-danger">Delete</button>
       </div>
     </td>
