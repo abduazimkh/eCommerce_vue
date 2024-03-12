@@ -30,7 +30,7 @@
     allData: function () {
       instance('products')
       .then(response => {
-        this.info = response.data.filter(a => this.input_value ? a.title.includes(this.input_value) : a )
+        this.info = response.data.filter(a => this.input_value ? a.title.toLowerCase().includes(this.input_value.toLowerCase()) : a )
       })
       .catch(error => {
         console.log(error)
