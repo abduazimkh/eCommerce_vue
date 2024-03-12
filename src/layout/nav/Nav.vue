@@ -62,10 +62,10 @@
           <Button>
             <RouterLink :to="user === false ? '/dashboard' : '/register'" ><i class="bi bi-person"></i></RouterLink>
           </Button>
-          <Button><RouterLink to="cart"><i class="bi bi-bag"></i></RouterLink></Button>
+          <Button><RouterLink to="/cart"><i class="bi bi-bag"></i></RouterLink></Button>
         </ul>
 
-        <Button class="cart" ><RouterLink to="cart"><i class="bi bi-bag"></i></RouterLink></Button>
+        <Button class="cart" ><RouterLink to="/cart"><i class="bi bi-bag"></i></RouterLink></Button>
       </nav>
     </Container>
   </div>

@@ -41,11 +41,9 @@
         <h2>Shop</h2>
 
         <div class="shop-cards" >
-          <div class="shop-card--items"  v-for="el in info">
-            <RouterLink :to="'/category/'+el.name" :key="el.id" class="shop-card"  >
-              <RouterLink :to="'/category/'+el.name" >{{ el.name }}</RouterLink>
-            </RouterLink>
-          </div>
+          <RouterLink :to="'/category/'+el.id"  class="shop-card"  v-for="el in info">
+            <RouterLink :to="'/category/'+el.id" :key="el.id" >{{ el.name }}</RouterLink>
+          </RouterLink>
         </div>
       </div>
     </Container>
@@ -138,8 +136,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 2.5rem;
     margin-bottom: 50px; 
-
-    .shop-card--items{
+    .shop-card{
       transition: all .2s ease-in;
       padding: 1.5rem 0;
       border-bottom: 1px solid lightgrey;
@@ -152,7 +149,7 @@
       } 
     }
 
-    .shop-card--items:hover{
+    .shop-card:hover{
       border-bottom: 1px solid #333;
       a{
         padding-left: 2rem

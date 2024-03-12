@@ -29,6 +29,9 @@
       },
       dataCell: {
         required: true
+      },
+      id: {
+        require: true
       }
     } 
   }
@@ -47,7 +50,7 @@
       </p>
     </td>
     <td :data-cell="Object.keys(this.dataCell)[4]" >{{ role }}</td>
-    <td :data-cell="Object.keys(this.dataCell)[6]" >{{ created.slice(0, 10) }}</td>
+    <td :data-cell="Object.keys(this.dataCell)[6]" >{{ created?.slice(0, 10) }}</td>
     <td :data-cell="Object.keys(this.dataCell)[5]" >
       <span>
         <img
@@ -64,7 +67,7 @@
     </td>
     <td :data-cell="'Actions'" >
       <div className="table-action__wrapper">
-        <button class="link btn-warning">Edit</button>
+        <button :data-id="id" class="link btn-warning">Edit</button>
       </div>
     </td>
   </tr>

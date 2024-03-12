@@ -1,13 +1,15 @@
 <script>
   import Container from "../../utils/Container.vue";
+  import ProductSwiperImg from "../../utils/ProductSwiperImg.vue";
 
   export default {
     components: {
       Container,
+      ProductSwiperImg,
 
     },
     methods: {
-      removeProduct: function (el) {
+      removeProduct(el) {
         this.$store.commit("removeCartData", el)
       },
     },
@@ -17,9 +19,9 @@
 </script>
 
 <template>
-  <div  v-if="$store.state.data?.length == 0" class="cart__wrapper">
+  <div  v-if="$store.state.data?.length == 0" class="wishlist-empty">
     <Container>
-      <div class="added-products">
+      <div >
         <h1>Empty Wishlist</h1>
       </div>
     </Container>
@@ -30,7 +32,7 @@
       <h1>Wishlist</h1>
       <div class="added-products">
           <div v-for="el in $store.state.data" class="cart-item">
-          <img :src="el.images[0]" :alt="el.title">
+          <ProductSwiperImg :imgs="el?.images[0]" />
           <h2>{{ el.title }}</h2>
           <p>{{ el.description.length > 35 ? el.description.split(" ").join(" ").slice(0, 50) : el.description }}</p>
           <div class="cart-price">
@@ -45,6 +47,15 @@
 </template>
 
 <style lang="scss">
+  .wishlist-empty{
+    margin-top: 130px;
+    min-height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .cart__wrapper{
     margin-top: 100px;
     min-height: 100vh;

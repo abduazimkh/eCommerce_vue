@@ -7,7 +7,7 @@
   import 'swiper/css';
   import 'swiper/css/pagination';
   import 'swiper/css/navigation';
-
+  import BackToTop from 'vue-backtotop';
 
   export default {
     components: {
@@ -15,6 +15,7 @@
       ProductSwiper,
       Swiper,
       SwiperSlide,
+      BackToTop
     },
     setup() {
       return {
@@ -36,20 +37,18 @@
     }
   },
     mounted () {
-    instance('products/'+ this.$route.params.id)
-      .then(response => {
-        this.info = response.data
-      })
-      .catch(error => {
-        console.log(error)
-        this.errored = true
-      })
-      .finally(() =>{
-        this.loading = false
-      })
+      this.scrollToTop(),
+      this.singleData();
     },
     updated(){
-      instance('products/'+ this.$route.params.id)
+      this.singleData();
+    },
+    methods: {
+      scrollToTop() {
+        window.scrollTo(0,0);
+      },
+      singleData(){
+        instance('products/'+ this.$route.params.id)
       .then(response => {
         this.info = response.data
       })
@@ -60,8 +59,7 @@
       .finally(() =>{
         this.loading = false
       })
-    },
-    methods: {
+      },
       saved(el){
         this.imgs = el
       },
@@ -163,14 +161,16 @@
     <Products/>
     <ProductSwiper/>
   </div>
+  <back-to-top text="Back to top" visibleoffset="500"></back-to-top>
 </template>
 
 <style lang="scss">
   .single__wrapper{
-    margin-top: 110px;
+    margin-top: 130px;
   }
 
   .single__content{
+    min-height: calc(100vh);
     margin-bottom: 100px;
     padding: 1rem;
     display: flex;
@@ -284,6 +284,7 @@
     img{
       width: 75px;
       height: 85px;
+      cursor: pointer;
     }
   }
 

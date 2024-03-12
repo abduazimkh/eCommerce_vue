@@ -2,6 +2,7 @@
 
 <script>
 import instance from '../../services/api'
+import ProductSwiperImg from '../../utils/ProductSwiperImg.vue'
 
 
   export default { 
@@ -28,6 +29,9 @@ import instance from '../../services/api'
       },
       dataCell: {
         required: true
+      },
+      id: {
+        require: true
       }
     },
     methods: {
@@ -60,7 +64,7 @@ import instance from '../../services/api'
         <span >{{ category }}</span>
       </p>
     </td>
-    <td :data-cell="Object.keys(this.dataCell)[3]" >{{ created.slice(0, 10) }}</td>
+    <td :data-cell="Object.keys(this.dataCell)[3]" >{{ created?.slice(0, 10) }}</td>
     <td :data-cell="Object.keys(this.dataCell)[2]" >
       <span>
         <img
@@ -77,7 +81,7 @@ import instance from '../../services/api'
     </td>
     <td :data-cell="'Actions'" >
       <div className="table-action__wrapper">
-        <button class="link btn-warning">Edit</button>
+        <button :data-id="id" class="link btn-warning">Edit</button>
         <button @click="deletePtoduct" class="link btn-danger">Delete</button>
       </div>
     </td>
