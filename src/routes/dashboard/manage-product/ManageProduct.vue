@@ -11,6 +11,7 @@
     },
     data () {
     return {
+      input_value: "",
       info: null,
       categoryData: null,
       loading: true,
@@ -29,7 +30,7 @@
     allData: function () {
       instance('products')
       .then(response => {
-        this.info = response.data
+        this.info = response.data.filter(a => this.input_value ? a.title.includes(this.input_value) : a )
       })
       .catch(error => {
         console.log(error)
@@ -138,6 +139,11 @@
 
 <template>
   <div class="manage__wrapper">
+    <div class="table-search">
+      <form  v-on:submit.prevent >
+        <input v-model="input_value" type="text" placeholder="Search">
+      </form>
+    </div>
     <div class="manage-box">
       <h2>Manage Product</h2>
 

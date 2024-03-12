@@ -34,6 +34,26 @@
   padding-bottom: 1rem;
 }
 
+.table-search{
+  form{
+    height: 50px;
+    display: flex;
+    input{
+      height: 100%;
+      font-size: 1.2rem;
+      text-indent: 25px;
+      flex: 1;
+      outline: none;
+      border: 1px solid #111;
+
+      &:focus{
+        box-shadow: 0 0 10px 1px #1113;
+      }
+
+    }
+  }
+}
+
 // table
 
 .table-wrapper{
