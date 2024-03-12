@@ -12,6 +12,7 @@ import Modal from "../../../utils/Modal.vue";
     },
     data () {
     return {
+      input_value: "",
       info: null,
       singleUser: null,
       loading: true,
@@ -29,7 +30,7 @@ import Modal from "../../../utils/Modal.vue";
     allUsers: function () {
       instance('users')
       .then(response => {
-        this.info = response.data
+        this.info = response.data.filter(a => this.input_value ? a.name.toLowerCase().includes(this.input_value.toLowerCase()) : a )
       })
       .catch(error => {
         console.log(error)
@@ -126,6 +127,11 @@ import Modal from "../../../utils/Modal.vue";
 
 <template>
   <div class="manage__wrapper">
+    <div class="table-search">
+      <form  v-on:submit.prevent >
+        <input v-model="input_value" type="text" placeholder="Search">
+      </form>
+    </div>
     <div class="manage-box">
       <h2>Manage User</h2>
 
