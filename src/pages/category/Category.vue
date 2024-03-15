@@ -2,12 +2,15 @@
   import instance from '../../services/api';
   import ProductSwiperImg from "../../utils/ProductSwiperImg.vue";;
   import Container from "../../utils/Container.vue";
+  import BackToTop from 'vue-backtotop';
 
 
   export default {
     components: {
       ProductSwiperImg,
       Container,
+      BackToTop
+
     },
     data () {
       return {
@@ -50,6 +53,7 @@
     },
     updated(){
       this.singleCategoryAllProducts()
+      this.scrollToTop()
     },
     unmounted(){
       this.scrollToTop()

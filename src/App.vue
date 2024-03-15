@@ -5,8 +5,11 @@
   import Nav from "./layout/nav/Nav.vue"; 
   import Footer from "./layout/footer/Footer.vue"; 
   import 'primeicons/primeicons.css';
-
+  import { toast } from 'vue3-toastify';
+  import 'vue3-toastify/dist/index.css';
+  
   export default {
+
     components: {
       Nav,
       Footer

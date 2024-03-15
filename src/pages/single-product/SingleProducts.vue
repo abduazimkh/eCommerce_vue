@@ -31,21 +31,11 @@
       imgs: null,
     }
   },
-  filters: {
-    currencydecimal (value) {
-      return value.toFixed(2)
-    }
-  },
-    mounted () {
-      this.scrollToTop(),
-      this.singleData();
-    },
-    updated(){
-      this.singleData();
-    },
     methods: {
       scrollToTop() {
-        window.scrollTo(0,0);
+        window.scrollTo({
+          top: 0
+        });
       },
       singleData(){
         instance('products/'+ this.$route.params.id)
@@ -69,7 +59,21 @@
       removeProduct: function (el) {
         this.$store.commit("removeCartData", el)
       },
+      a() {
+        // window.scrollTo(0,0);
+        this.scrollToTop()
+      }
     },
+    mounted () {
+      this.scrollToTop(),
+      this.singleData();
+    },
+    updated(){
+      this.singleData();
+      // this.scrollToTop()
+    },
+
+
   }
 </script>
 
@@ -159,7 +163,7 @@
     </div>
 
     <Products/>
-    <ProductSwiper/>
+    <ProductSwiper @click="a" />
   </div>
   <back-to-top text="Back to top" visibleoffset="500"></back-to-top>
 </template>

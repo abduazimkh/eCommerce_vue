@@ -3,12 +3,22 @@
   import Table from "../../../components/manage-table/ManageTable.vue";
   import instance from "../../../services/api"; 
   import Modal from "../../../utils/Modal.vue";
+  import { toast } from 'vue3-toastify';
+  import 'vue3-toastify/dist/index.css';
 
   export default {
     components: {
       Table,
       Modal
     },
+    setup() {
+    const notify = () => {
+      toast("Wow so easy !", {
+        autoClose: 1000,
+      }); // ToastOptions
+    }
+    return { notify };
+   },
     data () {
     return {
       input_value: "",
@@ -54,9 +64,6 @@
       instance('products/'+ id)
       .then(response => {
         this.info = response.data
-        this
-
-        console.log(this.info)
       })
       .catch(error => {
         console.log(error)
@@ -67,8 +74,6 @@
 
     createProduct(e){
       e.preventDefault();
-
-      // console.log(this.category)
 
       instance.post('products', {
         title: this.title,
@@ -82,7 +87,6 @@
           this.info = response;
           if(response.status === 201){
             this.isOpen = false;
-            console.log(response.data)
           }
         })
         .catch(error => {
@@ -102,6 +106,7 @@
         .then(response => {
           if(response.status === 200){
             this.isEditOpen = false;
+            this.notify()
           }
           this.title = "";
           this.price = "";
