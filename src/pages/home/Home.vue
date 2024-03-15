@@ -14,10 +14,14 @@
     methods:{
       scrollToTop() {
         window.scrollTo(0,0);
-      },
+      }
     },
     mounted(){
       this.scrollToTop()
+    },
+    updated(){
+      this.scrollToTop()
+
     }
   }
 
@@ -30,7 +34,7 @@
   <div class="home">
     <Header/>
     <Main/>
-    <back-to-top text="Back to top" visibleoffset="500"></back-to-top>
+    <back-to-top text="Back to top" ></back-to-top>
   </div>
 </template>
 

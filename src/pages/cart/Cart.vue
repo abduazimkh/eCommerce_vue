@@ -12,7 +12,13 @@
       removeProduct(el) {
         this.$store.commit("removeCartData", el)
       },
+      scrollToTop() {
+        window.scrollTo(0,0);
+      },
     },
+    mounted(){
+      this.scrollToTop()
+    }
     
   }
 

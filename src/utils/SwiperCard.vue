@@ -1,110 +1,48 @@
 <script>
-  import 'swiper/css';
-  import 'swiper/css/pagination';
-  import 'swiper/css/navigation';
-  import { Swiper, SwiperSlide } from 'swiper/vue';
-  import { Pagination, Navigation } from 'swiper/modules';
-  import instance from "../../services/api";
-  import { RouterLink } from 'vue-router';
-  import SwiperCard from "../../utils/SwiperCard.vue";
-  
-  export default {
-    components: {
-      Swiper,
-      SwiperSlide,
-      SwiperCard
-    },
-    setup() {
-      return {
-        modules: [Pagination, Navigation],
-      };
-    },
-    data () {
-    return {
-      info: null,
-      loading: true,
-      errored: false
-    }
-  },
-  filters: {
-    currencydecimal (value) {
-      return value.toFixed(2)
-    }
-  },
-    mounted () {
-    instance.get('products')
-      .then(response => {
-        this.info = response.data
-      })
-      .catch(error => {
-        console.log(error)
-        this.errored = true
-      })
-      .finally(() => this.loading = false)
-  }
+  import ProductSwiperImg from "./ProductSwiperImg.vue";
 
-  };
+  export default{
+    components: {
+      ProductSwiperImg,
+
+    },
+    props: {
+      info: {
+        required: true,
+      },
+      el: {
+        required: true,
+        type: Object,
+      }
+    }
+  }
 
 </script>
 
+<!-- html -->
 
 <template>
-  <div class="product__swiper">
-
-    <swiper
-      :breakpoints="{       
-        120: {       
-           slidesPerView: 1,
-        },
-        500: {       
-           slidesPerView: 2,
-        },
-        700: {       
-           slidesPerView: 3,
-        },
-        14000: {       
-           slidesPerView: 4,
-        },         
-      }"
-    :pagination="{
-      type: 'fraction',
-    }"
-    :spaceBetween="5"
-    :loop="true"
-    :slidesPerView="3.9"
-    :navigation="true"
-    :modules="modules"
-    class="mySwiper"
-  >
-
-    <swiper-slide  v-for="el in info" >
-      <SwiperCard :key="el?.id" :el="el" :info="info" />
-    </swiper-slide>
-    <!-- <swiper-slide v-for="el in info" >
-      <RouterLink :key="el.id" :to="'/single/'+el.id">
-        <ProductSwiperImg
-          :imgs="el?.images[0]"
-        />
-        <span>{{ el.title }}</span>
-        <p>{{ el.description.length >= 100 ? el.description.slice(0, 100) : el.description }}</p>
-              
-        <div class="price-text">
-          <strong>${{ el.price }}</strong>
-        </div>
-      </RouterLink>
-    </swiper-slide> -->
-  </swiper> 
-
-  </div>
+    <RouterLink :to="'/single/'+el?.id">
+      <ProductSwiperImg
+        :imgs="el?.images[0]"
+      />
+      <span>{{ el?.title }}</span>
+      <p>{{ el?.description.length >= 100 ? el?.description.slice(0, 100) : el?.description }}</p>
+            
+      <div class="price-text">
+        <strong>${{ el?.price }}</strong>
+      </div>
+    </RouterLink>
 </template>
 
-<style scoped>
+<!-- style -->
+
+<style >
   .product__swiper{
     margin: 100px 0;
     position: relative;
     height: 700px; 
 
-  }
   .swiper {
     width: 100%;
     height: 100%;
@@ -142,7 +80,7 @@
       transition: all .2s ease-in-out;
       position: absolute;
       width: 100%;
-      height: 50px;
+      height: 45px;
       left: 0;
       bottom: 0;
       background-color: var(--pl-color);
@@ -154,6 +92,7 @@
 
   }
 
+}
   .swiper-slide:hover{
     p{
       visibility: visible;
