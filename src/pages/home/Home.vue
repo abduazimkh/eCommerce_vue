@@ -11,17 +11,19 @@
       Main,
       BackToTop
     },
-    methods:{
+    methods: {
       scrollToTop() {
-        window.scrollTo(0,0);
-      }
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      },
     },
-    mounted(){
+    mounted () {
       this.scrollToTop()
     },
     updated(){
       this.scrollToTop()
-
     }
   }
 
