@@ -58,7 +58,6 @@ export default {
     },
     addProduct: function (el) {
       this.$store.commit("cartData", el, el.count = 1)
-      console.log(this.$store.state.cart_data)
     },
     removeProduct: function (el) {
       this.$store.commit("removeCartData", el)

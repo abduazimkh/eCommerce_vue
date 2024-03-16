@@ -41,18 +41,23 @@ export default {
   <div v-else class="cart__wrapper">
     <Container>
       <h1>Wishlist</h1>
+
       <div class="added-products">
+        <div class="cart-item">
+          <h3>Total Price: {{ 1 }}</h3>
+        </div>
         <div v-for="el in $store.state.cart_data" class="cart-item">
-          {{ el }}
           <ProductSwiperImg :imgs="el?.images[0]" />
           <h2>{{ el.title }}</h2>
           <p>{{ el.description.length > 35 ? el.description.split(" ").join(" ").slice(0, 50) : el.description }}</p>
           <div class="cart-price">
             <strong>${{ el.price }}</strong>
 
-            <button @click="IncrementProduct(el)">+</button>
-            {{ el.count }}
-            <button @click="DecrementProduct(el)">-</button>
+            <div>
+              <button @click="IncrementProduct(el)">+</button>
+              <strong>{{ el.count }}</strong>
+              <button @click="DecrementProduct(el)">-</button>
+            </div>
           </div>
         </div>
       </div>
@@ -74,6 +79,7 @@ export default {
   margin-top: 100px;
   min-height: 100vh;
   padding-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 h1 {
@@ -102,9 +108,16 @@ h1 {
 
   .cart-price {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
     margin: 1rem 0 0 0;
+    gap: 1rem;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
 
     strong {
       font-size: 1rem;
@@ -112,9 +125,16 @@ h1 {
 
     button {
       border: none;
-      color: #fff;
-      background-color: #111;
+      color: #111;
+      font-weight: 600;
+      background-color: transparent;
       padding: 12px 20px;
+      border: 1px solid #111;
+
+      &:active {
+        color: #fff;
+        background-color: #111;
+      }
     }
 
   }
