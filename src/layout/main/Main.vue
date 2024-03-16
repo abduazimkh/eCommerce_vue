@@ -33,7 +33,6 @@
     <Muvie/>
     <Product/>
     <ProductCards/>
-
   </main>
 
 </template>
