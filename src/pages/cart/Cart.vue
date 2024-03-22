@@ -43,8 +43,13 @@ export default {
       <h1>Wishlist</h1>
 
       <div class="added-products">
-        <div class="cart-item">
-          <h3>Total Price: {{ 1 }}</h3>
+        <div class="cart-item first-item">
+          <h3>Total Price: ${{ $store.state.cart_data.map(product => product.price * product.count).reduce((a, b) => a +
+    b, 0) }}</h3>
+          <strong>In store: {{ $store.state.cart_data.map(product => product.count).reduce((a, b) => a + b, 0)
+            }} {{ $store.state.cart_data.length > 1 ? "products" : "product" }} </strong>
+
+          <button class="btn">Shop</button>
         </div>
         <div v-for="el in $store.state.cart_data" class="cart-item">
           <ProductSwiperImg :imgs="el?.images[0]" />
@@ -138,7 +143,28 @@ h1 {
     }
 
   }
+}
 
+.first-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
+  h3 {
+    font-size: 2.5rem;
+  }
+
+  strong {
+    font-size: 1.2rem;
+  }
+
+  button {
+    bottom: 1rem;
+    position: absolute;
+    color: #fff;
+    background-color: #111;
+    width: 92%;
+  }
 }
 </style>
